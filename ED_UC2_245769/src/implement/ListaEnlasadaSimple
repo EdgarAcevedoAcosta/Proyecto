@@ -1,0 +1,94 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package implement;
+
+/**
+ *
+ * @author edgar
+ */
+public class ListaEnlazadaSimple {
+    int tam;
+    Nodo primero;
+
+    public ListaEnlazadaSimple() {
+        this.primero = null;
+        tam=0;
+    }
+
+    public void addFirst(Nodo dato) {
+        Nodo aux = primero;
+        if (primero == null) {
+            primero = dato;
+            return;
+        }
+        dato.setSiguiente(primero);
+        primero = dato;
+        tam++;
+    }
+    
+    public void addLast(Nodo dato){
+         Nodo n = primero;
+        while (n.getSiguiente().getSiguiente() != null) {
+            n = n.getSiguiente();
+        }
+        
+        n.setSiguiente(dato);
+    }
+
+    public void removeFirst() {
+        if (primero == null) {
+            System.out.println("Lista vacia");
+            return;
+        }
+        primero = primero.getSiguiente();
+        tam--;
+    }
+
+    public void removeLast() {
+        if (primero == null) {
+            System.out.println("Lista vacia");
+            return;
+
+        }
+        Nodo n = primero;
+        while (n.getSiguiente().getSiguiente() != null) {
+            n = n.getSiguiente();
+        }
+        n.setSiguiente(null);
+        tam--;
+    }
+     
+    public void isEmply(){
+        if (primero == null) {
+            System.out.println("Está vacia");
+            return;
+        }else{
+            System.out.println("No esta vacia");
+        }
+        
+    }
+
+    @Override
+    public String toString() {
+        Nodo n = primero;
+        while (n != null) {
+            System.out.print(n.dato + "--->");
+            n = n.getSiguiente();
+        }
+        return null;
+    }
+
+    public int Size() {
+        int contador = 0;
+        Nodo n = primero;
+
+        while (n != null) {
+            contador++;
+            n = n.getSiguiente();
+            
+        }
+        return contador;
+    }
+}
