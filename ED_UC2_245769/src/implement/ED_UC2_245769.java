@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
 package implement;
-
+import java.util.Scanner;
 /**
  *
  * @author edgar
@@ -15,37 +15,31 @@ public class ED_UC2_245769 {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        Nodo a = new Nodo(1);
-        Nodo b = new Nodo(2);
-        Nodo c = new Nodo(3);
+        int ejemplo;
+        Scanner sc = new Scanner(System.in);
+        Ejemplos ej=new Ejemplos();
+        do{
+            
+            System.out.println("Selecione el ejemplo que quiera ver");
+            System.out.println("1- LES, 2- LDE, 3- LESC, 4- LEDC, 0- Salir");
+            ejemplo= sc.nextInt();
+            switch(ejemplo){
+                case 1:
+                    ej.ejemploLES();
+                    break;
+                case 2:
+                    ej.ejemploLDE();
+                    break;
+                case 3:
+                    ej.ejemploLESC();
+                    break;
+                case 4:
+                    ej.ejemploLEDC();
+                    break;
+            }
+            
+            
+        }while(ejemplo== 0);
         
-        Nodo d = new Nodo(13);
-        Nodo e = new Nodo(21);
-        
-        ListaEnlazadaSimple lista = new ListaEnlazadaSimple();
-        
-        lista.isEmply();
-        
-        lista.addFirst(a);
-        lista.addFirst(b);
-        lista.addFirst(c);
-        
-        lista.addFirst(new Nodo(7));
-        lista.addLast(new Nodo(42));
-        
-        lista.toString();
-        
-
-        System.out.println("tamaño: " + lista.Size());
-        System.out.println("---");
-        
-        lista.removeFirst();
-        lista.removeLast();
-        
-        
-        System.out.println("tamaño: " + lista.Size());
-
-        lista.isEmply();
     }
-    
 }
