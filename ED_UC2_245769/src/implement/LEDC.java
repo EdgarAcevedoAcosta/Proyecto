@@ -7,23 +7,76 @@ package implement;
 
 
 /**
- *
- * @author edgar arturo acevedp acosta
+ * Lista Enlazada Doblemente Circular
+ * @author edgar arturo acevedp acosta 245769
  */
 public class LEDC {
-    int tam=0;
-    Nodo primero;
+int tam=0;
+    Nodo primero, anterior;
 
+    /**
+     * Constructor para agregar el primer elemento, en la lista 
+     * @param primero el elemento que inicializa la lista
+     */
     public LEDC(Nodo primero) {
         this.primero = primero;
         primero.setSiguiente(primero);
         primero.setAnterior(primero);
-        
         tam++;
     }
-    public void addFirst(Nodo dato) {
-        
-        if (tam == 1) {
+
+    /**
+     * Constructor que inicializa en null y 0, que nadamas crea la lista sin elementos.
+     */
+    public LEDC() {
+        primero= anterior =null;
+        tam=0;
+    }
+    
+    /**
+     * Nos permite conocer si la lista esta vacia o no,
+     * @return regresa un verdadero si la lista esta vacia y falso si tiene algun objeto
+     *  Regresa un mensaje de si la lista esta vacía
+     */
+    public boolean isEmpty(){
+        if(primero == null){
+            System.out.println("La lista esta vacia");
+        return true;
+        }
+        return false;
+    } 
+    
+    /**
+     * Regresa la cantidad de elementos que conforman la lista
+     * @return El numeno de elementos >=0
+     */
+    public int size(){
+        return tam;
+    }
+
+    /**
+     * Añade elementos al principio de la lista
+     * @param dato el elemento (dato) que se desea añadir en la lista
+     *  Manda una indicacion de que si se pudo agregar el elemento
+     */
+    public void addFirst(int dato) {
+        Nodo aux= new Nodo(dato);
+        if (isEmpty()) {
+            primero =aux;
+            primero.setSiguiente(primero);
+            primero.setAnterior(primero);
+            tam++;
+        }else{
+            anterior= primero.getAnterior();
+            aux.setSiguiente(primero);
+            aux.setAnterior(anterior);
+            primero.setAnterior(aux);
+            anterior.setSiguiente(aux);
+            primero=aux;
+            
+        }
+        /*
+        if (isEmpty()) {
             dato.setSiguiente(primero);
             primero.setSiguiente(dato);
             primero.setAnterior(dato);
@@ -35,59 +88,72 @@ public class LEDC {
             dato.setAnterior(primero);
             primero.getAnterior().setSiguiente(dato);
             primero.setAnterior(dato);
-        }
+        }*/
+        System.out.println("Se agrego el elemento a la lista");
         tam++;
     }
-    
-    public boolean isEmpty(){
-        return primero == null;
-    } 
-    
-    public int size(){
-        return tam;
-    }
-    
+
+    /**
+     * Añade elementos al final de la lista 
+     * @param dato el elemento que se quiere agregar 
+     * Manda una indicacion de que si se pudo agregar el elemento
+     */
     public void addLast(int dato){
         if(isEmpty()){
             return;
         }
         Nodo aux= new Nodo(dato);
-        Nodo ult= primero.getAnterior();
+        anterior= primero.getAnterior();
         
         aux.setSiguiente(primero);
-        aux.setAnterior(ult);
-        ult.setSiguiente(aux);
+        aux.setAnterior(anterior);
+        anterior.setSiguiente(aux);
         primero= aux;
         tam++;
     }
     
+    /**
+     * Elimina el elemento al inicio de la lista
+     * Verifica si la lista tiene elementos o solo un elemento
+     * Manda un mensage de que si se pudo eliminar
+     */
     public void removeFirst(){
         if(isEmpty()){
             return;
         }if (tam==1){
             primero=null;
         }else{
-            Nodo ult= primero.getAnterior();
+            anterior= primero.getAnterior();
             primero= primero.getSiguiente();
-            ult.setSiguiente(primero);
+            anterior.setSiguiente(primero);
         }
         tam--;
     }
     
+    /**
+     * Elimina un elemento al final de la lista
+     * Verifica si la lista tiene elementos o solo un elemento
+     * Manda un mensage de que si se pudo eliminar
+     */
     public void removeLast(){
         if(isEmpty()){
             return;
         }if (tam==1){
             primero=null;
         }else{
-            Nodo ult= primero.getAnterior();
-            Nodo aux=ult.getAnterior();
+            anterior= primero.getAnterior();
+            Nodo aux=anterior.getAnterior();
             aux.setSiguiente(primero);
             primero.setAnterior(aux);
         }
         tam--;
     }
     
+    /**
+     * Busca el elemento (dato) dentro de la lista
+     * @param dato El dato del elemento que se busca en la lista
+     * @return Regresa verdadero si el elemento esta en la lista y false si es el caso contrario
+     */
     public boolean contains(int dato){
         if(isEmpty()){
             return false;
@@ -101,6 +167,11 @@ public class LEDC {
         return false;
     }
     
+    /**
+     * Busca un dato en la lista de elementos 
+     * @param dato el dato que se esta buscando
+     * @return Regresa el elemento que tenga ese dato
+     */
     public Nodo getElement(int dato){
         if(isEmpty()){
             return null;
@@ -115,6 +186,20 @@ public class LEDC {
         return null;
     }
     
+    /**
+     * Elimina todos los elementos de la lista
+     * Manda un mensage de se ha eliminado la lista
+     */
+    public void Clear(){
+        primero= null;
+        anterior=null;
+        System.out.println("La lista ha sido eliminada");
+    }
+    
+    /**
+     * Muestra en consola cada uno de los elementos de la lista
+     * @return regresa la lista separada entre espacios 
+     */
     public String toString(){
         if(isEmpty()){
             return "La lista esta vacia";
