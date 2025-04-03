@@ -12,7 +12,7 @@ public class LESC {
     int tam=0;
     Nodo primero;
 
-       /**
+    /**
      * Constructor para agregar el primer elemento, en la lista 
      * @param primero el elemento que inicializa la lista
      */
@@ -58,6 +58,20 @@ public class LESC {
      */
     public void addFirst(int dato) {
         Nodo aux = new Nodo(dato);
+        if(isEmpty()){
+            primero=aux;
+            primero.setSiguiente(primero);
+        }else{
+            Nodo actual= primero;
+            while(actual.getSiguiente() !=primero){
+                actual=actual.getSiguiente();
+            }
+            aux.setSiguiente(primero);
+            actual.setSiguiente(aux);
+            primero=aux;
+        }
+        /*
+        Nodo aux = new Nodo(dato);
         if (tam == 1) {
             aux.setSiguiente(primero);
             primero.setSiguiente(aux);
@@ -70,7 +84,7 @@ public class LESC {
             }
             actual.setSiguiente(aux);
             primero=aux;
-        }
+        }*/
         System.out.println("Se agrego el elemento a la lista");
         tam++;
     }
@@ -207,9 +221,9 @@ public class LESC {
         // permite modificar la cadena sin crear nuevos objetos en memoria
         Nodo aux= primero;
         do{
-            resultado.append(aux.getDato()).append(" ->");
+            resultado.append(aux.getDato()).append(" -> ");
             aux= aux.getSiguiente();
-        }while(aux !=null);
+        }while(aux !=primero);
         resultado.append("(LESC)");
         return resultado.toString();
     }
