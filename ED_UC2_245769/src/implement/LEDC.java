@@ -14,6 +14,7 @@ public class LEDC {
 int tam=0;
     Nodo primero, anterior;
 
+
     /**
      * Constructor para agregar el primer elemento, en la lista 
      * @param primero el elemento que inicializa la lista
@@ -29,7 +30,8 @@ int tam=0;
      * Constructor que inicializa en null y 0, que nadamas crea la lista sin elementos.
      */
     public LEDC() {
-        primero= anterior =null;
+        primero= null;
+        anterior=null;
         tam=0;
     }
     
@@ -61,34 +63,18 @@ int tam=0;
      */
     public void addFirst(int dato) {
         Nodo aux= new Nodo(dato);
-        if (isEmpty()) {
+        if (primero==null) {
             primero =aux;
-            primero.setSiguiente(primero);
-            primero.setAnterior(primero);
+            anterior=aux;
             tam++;
         }else{
-            anterior= primero.getAnterior();
             aux.setSiguiente(primero);
-            aux.setAnterior(anterior);
             primero.setAnterior(aux);
-            anterior.setSiguiente(aux);
             primero=aux;
             
         }
-        /*
-        if (isEmpty()) {
-            dato.setSiguiente(primero);
-            primero.setSiguiente(dato);
-            primero.setAnterior(dato);
-            dato.setAnterior(primero);
-            primero=dato;
-            tam++;
-        }else if(tam>1){
-            dato.setSiguiente(primero);
-            dato.setAnterior(primero);
-            primero.getAnterior().setSiguiente(dato);
-            primero.setAnterior(dato);
-        }*/
+        anterior.setSiguiente(primero);
+        primero.setAnterior(anterior);
         System.out.println("Se agrego el elemento a la lista");
         tam++;
     }
@@ -99,16 +85,18 @@ int tam=0;
      * Manda una indicacion de que si se pudo agregar el elemento
      */
     public void addLast(int dato){
-        if(isEmpty()){
-            return;
-        }
         Nodo aux= new Nodo(dato);
-        anterior= primero.getAnterior();
-        
-        aux.setSiguiente(primero);
-        aux.setAnterior(anterior);
-        anterior.setSiguiente(aux);
-        primero= aux;
+        if(primero==null){
+            primero =aux;
+            anterior=aux;
+        }else{
+            anterior.setSiguiente(aux);
+            aux.setAnterior(anterior);
+            anterior= aux;
+        }
+        anterior.setSiguiente(primero);
+        primero.setAnterior(anterior);
+        System.out.println("Se agrego el elemento a la lista");
         tam++;
     }
     
@@ -127,6 +115,7 @@ int tam=0;
             primero= primero.getSiguiente();
             anterior.setSiguiente(primero);
         }
+        System.out.println("Se elimino el elemento a la lista");
         tam--;
     }
     
@@ -146,6 +135,7 @@ int tam=0;
             aux.setSiguiente(primero);
             primero.setAnterior(aux);
         }
+        System.out.println("Se elimino el elemento a la lista");
         tam--;
     }
     
@@ -155,7 +145,7 @@ int tam=0;
      * @return Regresa verdadero si el elemento esta en la lista y false si es el caso contrario
      */
     public boolean contains(int dato){
-        if(isEmpty()){
+        if(primero==null){
             return false;
         }
         Nodo aux=primero;
@@ -163,6 +153,7 @@ int tam=0;
             if(aux.getDato()== dato){
                 return true;
             }
+            aux= aux.getSiguiente();
         }while(aux != primero);
         return false;
     }
@@ -173,7 +164,7 @@ int tam=0;
      * @return Regresa el elemento que tenga ese dato
      */
     public Nodo getElement(int dato){
-        if(isEmpty()){
+        if(primero==null){
             return null;
         }
         Nodo aux=primero;
@@ -200,17 +191,18 @@ int tam=0;
      * Muestra en consola cada uno de los elementos de la lista
      * @return regresa la lista separada entre espacios 
      */
-    public String toString(){
-        if(isEmpty()){
+    public String ToString(){
+        if (isEmpty()) {
             return "La lista esta vacia";
         }
         StringBuilder resultado= new StringBuilder();
         // permite modificar la cadena sin crear nuevos objetos en memoria
         Nodo aux= primero;
         do{
-            resultado.append(aux.getDato()).append(" ");
+            resultado.append(aux.getDato()).append(" -> ");
             aux= aux.getSiguiente();
-        }while(aux != primero);
+        }while(aux !=primero);
+        resultado.append("(LESC)");
         return resultado.toString();
     }
 }
