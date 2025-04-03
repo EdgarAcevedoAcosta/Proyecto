@@ -19,7 +19,8 @@ public class LED {
      *  
      */
     public LED() {
-        primero= anterior =null;
+        primero =null;
+        anterior=null;
         tam=0;
     }
     
@@ -61,8 +62,8 @@ public class LED {
     public void addFirst(int dato){
         Nodo aux =new Nodo(dato); 
         if(isEmpty()){
-            primero= anterior= aux;
-          
+            primero= aux;
+            anterior= aux;
         }else{
             aux.setSiguiente(primero);
             primero.setAnterior(aux);
@@ -80,7 +81,8 @@ public class LED {
     public void addLast(int dato){
         Nodo aux= new Nodo(dato);
         if(primero==null){
-            primero= anterior= aux;
+            primero=aux;
+            anterior= aux;
         }else{
             anterior.setSiguiente(aux);
             aux.setAnterior(anterior);
@@ -184,18 +186,21 @@ public class LED {
      * Muestra en consola cada uno de los elementos de la lista
      * @return regresa la lista separada entre espacios 
      */
-    public String tostring(){
-        if(primero==null){
+    public String Tostring(){
+        if (primero==null) {
             return "La lista esta vacia";
         }
-        StringBuilder resultado= new StringBuilder();
+        StringBuilder resultado= new StringBuilder("[");
         // permite modificar la cadena sin crear nuevos objetos en memoria
         Nodo aux= primero;
         while(aux != null){
-            resultado.append(aux.dato).append(" - ");
-            aux=aux.siguiente;
+            resultado.append(aux.getDato());
+            if(aux.getSiguiente() != null){
+                resultado.append(" <-> ");
+            }
+            aux= aux.getSiguiente();
         }
-        resultado.append("null");
+        resultado.append(" (LDE)");
         return resultado.toString();
         
     }
