@@ -19,7 +19,6 @@ public class ED_UC2_245769 {
         Scanner sc = new Scanner(System.in);
         Ejemplos ej=new Ejemplos();
         do{
-            
             System.out.println("Selecione el ejemplo que quiera ver");
             System.out.println("1- LES, 2- LDE, 3- LESC, 4- LEDC, 0- Salir");
             ejemplo= sc.nextInt();
@@ -37,8 +36,6 @@ public class ED_UC2_245769 {
                     ej.ejemploLEDC();
                     break;
             }
-            
-            
         }while(ejemplo== 0);
         
     }
