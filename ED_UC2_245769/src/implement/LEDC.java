@@ -4,8 +4,6 @@
  */
 package implement;
 
-
-
 /**
  * Lista Enlazada Doblemente Circular
  * @author edgar arturo acevedp acosta 245769
@@ -13,7 +11,6 @@ package implement;
 public class LEDC {
 int tam=0;
     Nodo primero, anterior;
-
 
     /**
      * Constructor para agregar el primer elemento, en la lista 
