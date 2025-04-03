@@ -12,14 +12,19 @@ public class ListaEnlazadaSimple {
     int tam=0;
     Nodo primero;
 
+public class ListaEnlazadaSimple {
+    int tam=0;
+    Nodo primero;
+
     /**
      *  Constructor de la lista doblemente enlazada
      *  los elementos del nodo: primero y anterior se inicializa con null y 0 que seria lo mismo.
      */
     public ListaEnlazadaSimple() {
         this.primero = null;
-        tam++;
+        tam=0;
     }
+    
     /**
      * Nos permite conocer si la lista esta vacia o no,
      * @return regresa un verdadero si la lista esta vacia y falso si tiene algun objeto
@@ -49,6 +54,7 @@ public class ListaEnlazadaSimple {
         }
         return contador;
     }
+    
     /**
      * Añade elementos al principio de la lista
      * @param dato el elemento (dato) que se desea añadir en la lista
@@ -119,8 +125,6 @@ public class ListaEnlazadaSimple {
         tam--;
     }
      
-    
-
     /**
      * Busca el elemento (dato) dentro de la lista
      * @param dato El dato del elemento que se busca en la lista
@@ -140,6 +144,7 @@ public class ListaEnlazadaSimple {
         }while(aux != primero.getSiguiente());
         return false;
     }
+    
     /**
      * Busca un dato en la lista de elementos 
      * @param dato el dato que se esta buscando
@@ -182,6 +187,5 @@ public class ListaEnlazadaSimple {
         }
         return null;
     }
-
 
 }
